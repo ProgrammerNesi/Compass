@@ -1,0 +1,132 @@
+So It began with learning rag and then applying
+its learning to a mini-pipline which combines all of my learnings
+
+I started it as first feeding the dataset given in the course
+I made a gold question dataset out of it into a jsonl file
+then i made the same basic pipline of ingestion and retreival
+
+Then i got into evaluating the before of using advanced rag concepts 
+i Used diffrerent metrics i learned to score the relelvance fo the basic
+rag pipline initialy before i added the advanced stuffs.
+
+Then i plan to add tools of every advanced rag techniques that the agent can Use
+whenever the basic rag does not give desired result and set in part with the metrics required
+
+tools adding started, i planned to add 9 tools as per initial implementaiton :
+    1. vector search tool : the OG tool for rag
+
+    2. BM25 tool : lets get deep into it,
+        BM25 (Best Match 25) is a lexical ranking algorithm that scores documents based on
+        query-term occurrence, term rarity, term frequency saturation, and document-length normalization.
+        BM25
+    │
+    ├── Term Frequency(TF) : Measures how often a query word appears in a document,
+                            using saturation limits so repeating a word endlessly does not give an unfair advantage.
+    │      ↓
+    │   Does this document contain the query term?
+    │
+    ├── Inverse Document Frequency(IDF) : Gives higher importance to rare words and lower weight to common words.
+    │      ↓
+    │   Is that term rare/useful?
+    │
+    └── Document Length : Adjusts scores so that long documents do not automatically dominate short documents.
+            ↓
+        Is the document unusually long?
+
+        done as : 
+        Query
+        ↓
+        Tokenize
+        ↓
+        For every document:
+        calculate term frequency
+        calculate term rarity
+        normalize document length
+        calculate BM25 score
+        ↓
+        Sort by score
+        ↓
+        Top K documents
+
+    3. Hybrid tools with RRF : it combines and takes best of both methods. it uses Reciprocal rank fusion to rank
+        retrieved documents from both. 
+
+        RRF (Reciprocal Rank Fusion) combines rankings from different retrieval methods, such as Vector Search + BM25.
+        Instead of comparing their different raw scores, it uses their ranks. A document ranked highly by multiple retrievers gets a higher final score.
+
+        Formula
+        RRF(d) = Σ 1 / (k + rank_r(d))
+
+        Where:
+        d = document
+        r = each retrieval system
+        rank_r(d) = rank of document d in that retriever
+        k = constant, usually 60
+
+        For Vector + BM25:
+        RRF(d) =
+        1 / (60 + vector_rank)
+        +
+        1 / (60 + bm25_rank)
+
+    4. Query Rewrite : for better retreival we Rewrite the query
+
+    5. Query Expansion : for even better retrieval context we generate multiple similar queries from the given query.
+        it also contains MMR,
+        Maximal Marginal Relevance (MMR) is a retrieval/reranking technique that tries to select documents that are:
+        Relevant to the query, and
+        Different from documents already selected
+        It is a retrieval/reranking strategy used to increase diversity of the retrieved context.
+        The goal is to avoid retrieving 5 chunks that all say essentially the same thing.
+
+        Formula
+        MMR = λ × Similarity(document, query)
+            − (1 − λ) × max Similarity(document, selected_documents)
+
+        Where:
+        Similarity(document, query) → how relevant the document is to the question
+        Similarity(document, selected_documents) → how redundant it is with already-selected documents
+        λ → trade-off between relevance and diversity
+        λ = 1 → only relevance
+        λ = 0 → only diversity
+        commonly around 0.5–0.7
+    
+    6. Metadata search : Used for vector search having filter of document metadata to retrieve relevant ones only
+
+    7. Reranker using cross-encoder : Used to rerank the document retrieved for giving better context priority to llm
+        we use cross-encoder model for this purpose as,
+        A cross-encoder is a model used to rerank retrieved candidates by looking at the query and document together.
+        Conceptually, a cross-encoder reranker takes the user’s query and each retrieved document chunk together and asks, 
+        “How relevant is this specific document to this specific query?” Unlike an embedding model that 
+        converts the query and document separately and compares their vectors, 
+        the cross-encoder processes the query–document pair jointly, allowing it to examine detailed 
+        relationships between the words and context. It produces a relevance score for each candidate, 
+        and you then sort the candidates by that score. So 
+        the flow is: retrieve broadly → cross-encoder examines each query + candidate pair deeply → assign relevance 
+        scores → rerank → keep the best chunks.
+        The cross-encoder does not create two independent embeddings and compare them.
+
+        It receives:
+
+        [QUERY: How can I cancel my subscription?]
+                            +
+        [DOCUMENT: Customers can terminate their subscription
+                within 30 days by contacting support.]
+
+        together as one input to the Transformer.
+
+        Inside the Transformer, the query tokens and document tokens can directly interact through attention
+        and gets relevance.
+
+    
+Now after adding the tools will evaluate working of all tools correctly after that orchestrator building
+before that for bm25 setup do
+
+Done with evaluating working of all tools and their benchmarking
+
+Now will move forward to making the orchestrator after that functionality ui and final test
+
+Done with the orchestrator layer --- will review it
+after that metrics testing
+after that making pipeline to useful with ui and end to end as general purpose
+complete testing

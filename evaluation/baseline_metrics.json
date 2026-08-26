@@ -1,0 +1,224 @@
+{
+  "system": "baseline_rag",
+  "tests": 10,
+  "k": 10,
+  "metrics": {
+    "retrieval": {
+      "mrr": 0.95,
+      "ndcg": 0.9288047267243776,
+      "recall_at_k": 0.7332828282828283,
+      "precision_at_k": 0.65,
+      "keyword_coverage": 73.32828282828282,
+      "hit_rate_at_k": 1.0
+    },
+    "answer": {
+      "correctness": 3.9,
+      "completeness": 3.9,
+      "relevance": 4.0,
+      "faithfulness": 4.3,
+      "overall": 3.9
+    }
+  },
+  "per_question": [
+    {
+      "retrieval": {
+        "mrr": 1.0,
+        "ndcg": 1.0,
+        "recall_at_k": 1.0,
+        "precision_at_k": 1.0,
+        "keyword_coverage": 100.0,
+        "hit_rate_at_k": 1.0
+      },
+      "answer": {
+        "correctness": 5.0,
+        "completeness": 5.0,
+        "relevance": 5.0,
+        "faithfulness": 5.0,
+        "overall": 5.0,
+        "feedback": "The answer is accurate, complete, and directly addresses the question using the provided context."
+      },
+      "question": "In what year was Insurellm founded, and who founded the company?",
+      "category": "direct_fact"
+    },
+    {
+      "retrieval": {
+        "mrr": 1.0,
+        "ndcg": 1.0,
+        "recall_at_k": 0.8,
+        "precision_at_k": 0.5,
+        "keyword_coverage": 80.0,
+        "hit_rate_at_k": 1.0
+      },
+      "answer": {
+        "correctness": 5.0,
+        "completeness": 5.0,
+        "relevance": 5.0,
+        "faithfulness": 5.0,
+        "overall": 5.0,
+        "feedback": "The answer is accurate, complete, and directly addresses the question using the provided context."
+      },
+      "question": "What was Insurellm's very first product, and what does it do?",
+      "category": "direct_fact"
+    },
+    {
+      "retrieval": {
+        "mrr": 1.0,
+        "ndcg": 0.9764093402750902,
+        "recall_at_k": 0.7272727272727273,
+        "precision_at_k": 0.7,
+        "keyword_coverage": 72.72727272727273,
+        "hit_rate_at_k": 1.0
+      },
+      "answer": {
+        "correctness": 5.0,
+        "completeness": 5.0,
+        "relevance": 5.0,
+        "faithfulness": 5.0,
+        "overall": 5.0,
+        "feedback": "The model correctly identified that the provided context does not contain the information requested in the prompt, avoiding hallucinations by stating that the data is missing."
+      },
+      "question": "Four Insurellm products all launched their 'version 1.0' during the first half of 2025. Name all four products, the exact quarter each launched in, and the core capability each version 1.0 introduced.",
+      "category": "multi_hop"
+    },
+    {
+      "retrieval": {
+        "mrr": 1.0,
+        "ndcg": 0.9066276098484507,
+        "recall_at_k": 0.125,
+        "precision_at_k": 0.3,
+        "keyword_coverage": 12.5,
+        "hit_rate_at_k": 1.0
+      },
+      "answer": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "relevance": 1.0,
+        "faithfulness": 5.0,
+        "overall": 1.0,
+        "feedback": "The model correctly identified that the information was missing from the provided context, but the information actually exists in the reference answer provided for the task. The model failed to retrieve or synthesize the information despite it being a test of RAG capabilities."
+      },
+      "question": "One Insurellm employee's HR record credits her with building a recommendation engine that increased conversion by 28%, referring to the product by a slightly different name than its official product listing. Who is this employee, which Insurellm product was this actually built for, and what does that product charge consumers who want its optional premium subscription?",
+      "category": "multi_hop"
+    },
+    {
+      "retrieval": {
+        "mrr": 1.0,
+        "ndcg": 0.8194270280062366,
+        "recall_at_k": 0.5,
+        "precision_at_k": 0.3,
+        "keyword_coverage": 50.0,
+        "hit_rate_at_k": 1.0
+      },
+      "answer": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "relevance": 1.0,
+        "faithfulness": 1.0,
+        "overall": 1.0,
+        "feedback": "The model failed to identify the two Data Engineers (Maya Thompson and Maxine Thompson) present in the provided context. It incorrectly claimed there was only one Data Engineer and hallucinated that the information was missing."
+      },
+      "question": "Insurellm has two Data Engineers who share the same last name. Compare their work locations, current salaries, and the specific data-pipeline efficiency improvement percentage each is credited with in their HR record.",
+      "category": "comparison"
+    },
+    {
+      "retrieval": {
+        "mrr": 1.0,
+        "ndcg": 0.9895948844467957,
+        "recall_at_k": 0.875,
+        "precision_at_k": 0.9,
+        "keyword_coverage": 87.5,
+        "hit_rate_at_k": 1.0
+      },
+      "answer": {
+        "correctness": 2.0,
+        "completeness": 2.0,
+        "relevance": 3.0,
+        "faithfulness": 2.0,
+        "overall": 2.0,
+        "feedback": "The model failed to identify the correct products. It incorrectly identified Healthllm instead of Claimllm. While it correctly identified Lifellm, it missed the specific blockchain capability and launch date for Claimllm, which were explicitly provided in the context (though the context for Claimllm's roadmap was missing, the reference answer provided the correct information which should have been cross-referenced or identified if present). The model hallucinated that Healthllm had a blockchain capability in its roadmap, when it was only mentioned as a general innovation lab topic."
+      },
+      "question": "Two Insurellm products' development roadmaps both mention blockchain technology. Name both products, describe the blockchain-related capability each introduces, and state the exact quarter and year each is scheduled to launch.",
+      "category": "temporal"
+    },
+    {
+      "retrieval": {
+        "mrr": 1.0,
+        "ndcg": 0.9560094522876518,
+        "recall_at_k": 0.5555555555555556,
+        "precision_at_k": 0.8,
+        "keyword_coverage": 55.55555555555556,
+        "hit_rate_at_k": 1.0
+      },
+      "answer": {
+        "correctness": 5.0,
+        "completeness": 5.0,
+        "relevance": 5.0,
+        "faithfulness": 5.0,
+        "overall": 5.0,
+        "feedback": "The answer is accurate, complete, and directly addresses all parts of the prompt using the provided context."
+      },
+      "question": "Atlantic Risk Solutions and Fortress Business Underwriters both subscribe to Bizllm's Professional Tier at $12,000/month, but their contracts state different total fixed contract values because of different term lengths. What is each company's contract term length and total contract value, and what is the dollar difference between the two totals?",
+      "category": "contract"
+    },
+    {
+      "retrieval": {
+        "mrr": 1.0,
+        "ndcg": 0.9181890364255552,
+        "recall_at_k": 0.75,
+        "precision_at_k": 0.6,
+        "keyword_coverage": 75.0,
+        "hit_rate_at_k": 1.0
+      },
+      "answer": {
+        "correctness": 5.0,
+        "completeness": 5.0,
+        "relevance": 5.0,
+        "faithfulness": 5.0,
+        "overall": 5.0,
+        "feedback": "The answer is accurate, complete, and directly addresses all parts of the user's request using the provided context."
+      },
+      "question": "An insurer wants a single Insurellm platform that can underwrite multiple commercial insurance lines, includes dedicated cyber risk assessment tools, and must stay under $15,000/month before moving to custom enterprise pricing. Which product and pricing tier fits these requirements, and what specific capabilities does that tier add on top of the entry-level tier?",
+      "category": "product_selection"
+    },
+    {
+      "retrieval": {
+        "mrr": 1.0,
+        "ndcg": 0.9793656319464776,
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.8,
+        "keyword_coverage": 100.0,
+        "hit_rate_at_k": 1.0
+      },
+      "answer": {
+        "correctness": 5.0,
+        "completeness": 5.0,
+        "relevance": 5.0,
+        "faithfulness": 5.0,
+        "overall": 5.0,
+        "feedback": "The answer is accurate, complete, and directly addresses the prompt using the provided context. It correctly identifies the technical lead and the release timeline."
+      },
+      "question": "Which senior engineer serves as the technical lead for the Homellm portal, and in what quarter and year did Homellm release the version featuring expanded predictive maintenance alerts and automated underwriting processes?",
+      "category": "employee_product"
+    },
+    {
+      "retrieval": {
+        "mrr": 0.5,
+        "ndcg": 0.7424242840075184,
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.6,
+        "keyword_coverage": 100.0,
+        "hit_rate_at_k": 1.0
+      },
+      "answer": {
+        "correctness": 5.0,
+        "completeness": 5.0,
+        "relevance": 5.0,
+        "faithfulness": 5.0,
+        "overall": 5.0,
+        "feedback": "The answer is accurate, complete, and directly supported by the provided context."
+      },
+      "question": "Most Insurellm client contracts describe the client's license as 'non-exclusive.' Which single Insurellm contract instead grants a client genuine exclusive use of a product within a specific market vertical and region, and what are that vertical and region?",
+      "category": "direct_fact"
+    }
+  ]
+}

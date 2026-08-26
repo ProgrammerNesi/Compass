@@ -1,0 +1,556 @@
+{
+  "tests": 10,
+  "k": 10,
+  "tools": {
+    "vector": {
+      "mrr": 0.95,
+      "ndcg": 0.9288047267243776,
+      "recall_at_k": 0.7332828282828283,
+      "precision_at_k": 0.65,
+      "keyword_coverage": 73.32828282828282,
+      "hit_rate_at_k": 1.0,
+      "per_question": [
+        {
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "recall_at_k": 1.0,
+          "precision_at_k": 1.0,
+          "keyword_coverage": 100.0,
+          "hit_rate_at_k": 1.0,
+          "question": "In what year was Insurellm founded, and who founded the company?",
+          "category": "direct_fact"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "recall_at_k": 0.8,
+          "precision_at_k": 0.5,
+          "keyword_coverage": 80.0,
+          "hit_rate_at_k": 1.0,
+          "question": "What was Insurellm's very first product, and what does it do?",
+          "category": "direct_fact"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 0.9764093402750902,
+          "recall_at_k": 0.7272727272727273,
+          "precision_at_k": 0.7,
+          "keyword_coverage": 72.72727272727273,
+          "hit_rate_at_k": 1.0,
+          "question": "Four Insurellm products all launched their 'version 1.0' during the first half of 2025. Name all four products, the exact quarter each launched in, and the core capability each version 1.0 introduced.",
+          "category": "multi_hop"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 0.9066276098484507,
+          "recall_at_k": 0.125,
+          "precision_at_k": 0.3,
+          "keyword_coverage": 12.5,
+          "hit_rate_at_k": 1.0,
+          "question": "One Insurellm employee's HR record credits her with building a recommendation engine that increased conversion by 28%, referring to the product by a slightly different name than its official product listing. Who is this employee, which Insurellm product was this actually built for, and what does that product charge consumers who want its optional premium subscription?",
+          "category": "multi_hop"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 0.8194270280062366,
+          "recall_at_k": 0.5,
+          "precision_at_k": 0.3,
+          "keyword_coverage": 50.0,
+          "hit_rate_at_k": 1.0,
+          "question": "Insurellm has two Data Engineers who share the same last name. Compare their work locations, current salaries, and the specific data-pipeline efficiency improvement percentage each is credited with in their HR record.",
+          "category": "comparison"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 0.9895948844467957,
+          "recall_at_k": 0.875,
+          "precision_at_k": 0.9,
+          "keyword_coverage": 87.5,
+          "hit_rate_at_k": 1.0,
+          "question": "Two Insurellm products' development roadmaps both mention blockchain technology. Name both products, describe the blockchain-related capability each introduces, and state the exact quarter and year each is scheduled to launch.",
+          "category": "temporal"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 0.9560094522876518,
+          "recall_at_k": 0.5555555555555556,
+          "precision_at_k": 0.8,
+          "keyword_coverage": 55.55555555555556,
+          "hit_rate_at_k": 1.0,
+          "question": "Atlantic Risk Solutions and Fortress Business Underwriters both subscribe to Bizllm's Professional Tier at $12,000/month, but their contracts state different total fixed contract values because of different term lengths. What is each company's contract term length and total contract value, and what is the dollar difference between the two totals?",
+          "category": "contract"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 0.9181890364255552,
+          "recall_at_k": 0.75,
+          "precision_at_k": 0.6,
+          "keyword_coverage": 75.0,
+          "hit_rate_at_k": 1.0,
+          "question": "An insurer wants a single Insurellm platform that can underwrite multiple commercial insurance lines, includes dedicated cyber risk assessment tools, and must stay under $15,000/month before moving to custom enterprise pricing. Which product and pricing tier fits these requirements, and what specific capabilities does that tier add on top of the entry-level tier?",
+          "category": "product_selection"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 0.9793656319464776,
+          "recall_at_k": 1.0,
+          "precision_at_k": 0.8,
+          "keyword_coverage": 100.0,
+          "hit_rate_at_k": 1.0,
+          "question": "Which senior engineer serves as the technical lead for the Homellm portal, and in what quarter and year did Homellm release the version featuring expanded predictive maintenance alerts and automated underwriting processes?",
+          "category": "employee_product"
+        },
+        {
+          "mrr": 0.5,
+          "ndcg": 0.7424242840075184,
+          "recall_at_k": 1.0,
+          "precision_at_k": 0.6,
+          "keyword_coverage": 100.0,
+          "hit_rate_at_k": 1.0,
+          "question": "Most Insurellm client contracts describe the client's license as 'non-exclusive.' Which single Insurellm contract instead grants a client genuine exclusive use of a product within a specific market vertical and region, and what are that vertical and region?",
+          "category": "direct_fact"
+        }
+      ]
+    },
+    "bm25": {
+      "mrr": 0.9,
+      "ndcg": 0.8764134716869355,
+      "recall_at_k": 0.6373737373737374,
+      "precision_at_k": 0.53,
+      "keyword_coverage": 63.73737373737374,
+      "hit_rate_at_k": 1.0,
+      "per_question": [
+        {
+          "mrr": 1.0,
+          "ndcg": 0.9504206262110482,
+          "recall_at_k": 1.0,
+          "precision_at_k": 0.9,
+          "keyword_coverage": 100.0,
+          "hit_rate_at_k": 1.0,
+          "question": "In what year was Insurellm founded, and who founded the company?",
+          "category": "direct_fact"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 0.8772153153380493,
+          "recall_at_k": 0.8,
+          "precision_at_k": 0.2,
+          "keyword_coverage": 80.0,
+          "hit_rate_at_k": 1.0,
+          "question": "What was Insurellm's very first product, and what does it do?",
+          "category": "direct_fact"
+        },
+        {
+          "mrr": 0.5,
+          "ndcg": 0.7257275327064654,
+          "recall_at_k": 0.8181818181818182,
+          "precision_at_k": 0.6,
+          "keyword_coverage": 81.81818181818183,
+          "hit_rate_at_k": 1.0,
+          "question": "Four Insurellm products all launched their 'version 1.0' during the first half of 2025. Name all four products, the exact quarter each launched in, and the core capability each version 1.0 introduced.",
+          "category": "multi_hop"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 0.7988614740430418,
+          "recall_at_k": 0.75,
+          "precision_at_k": 0.3,
+          "keyword_coverage": 75.0,
+          "hit_rate_at_k": 1.0,
+          "question": "One Insurellm employee's HR record credits her with building a recommendation engine that increased conversion by 28%, referring to the product by a slightly different name than its official product listing. Who is this employee, which Insurellm product was this actually built for, and what does that product charge consumers who want its optional premium subscription?",
+          "category": "multi_hop"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "recall_at_k": 0.2,
+          "precision_at_k": 0.1,
+          "keyword_coverage": 20.0,
+          "hit_rate_at_k": 1.0,
+          "question": "Insurellm has two Data Engineers who share the same last name. Compare their work locations, current salaries, and the specific data-pipeline efficiency improvement percentage each is credited with in their HR record.",
+          "category": "comparison"
+        },
+        {
+          "mrr": 0.5,
+          "ndcg": 0.6934264036172708,
+          "recall_at_k": 0.25,
+          "precision_at_k": 0.2,
+          "keyword_coverage": 25.0,
+          "hit_rate_at_k": 1.0,
+          "question": "Two Insurellm products' development roadmaps both mention blockchain technology. Name both products, describe the blockchain-related capability each introduces, and state the exact quarter and year each is scheduled to launch.",
+          "category": "temporal"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "recall_at_k": 0.5555555555555556,
+          "precision_at_k": 1.0,
+          "keyword_coverage": 55.55555555555556,
+          "hit_rate_at_k": 1.0,
+          "question": "Atlantic Risk Solutions and Fortress Business Underwriters both subscribe to Bizllm's Professional Tier at $12,000/month, but their contracts state different total fixed contract values because of different term lengths. What is each company's contract term length and total contract value, and what is the dollar difference between the two totals?",
+          "category": "contract"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 0.8002671129756275,
+          "recall_at_k": 0.375,
+          "precision_at_k": 0.5,
+          "keyword_coverage": 37.5,
+          "hit_rate_at_k": 1.0,
+          "question": "An insurer wants a single Insurellm platform that can underwrite multiple commercial insurance lines, includes dedicated cyber risk assessment tools, and must stay under $15,000/month before moving to custom enterprise pricing. Which product and pricing tier fits these requirements, and what specific capabilities does that tier add on top of the entry-level tier?",
+          "category": "product_selection"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "recall_at_k": 0.625,
+          "precision_at_k": 1.0,
+          "keyword_coverage": 62.5,
+          "hit_rate_at_k": 1.0,
+          "question": "Which senior engineer serves as the technical lead for the Homellm portal, and in what quarter and year did Homellm release the version featuring expanded predictive maintenance alerts and automated underwriting processes?",
+          "category": "employee_product"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 0.9182162519778517,
+          "recall_at_k": 1.0,
+          "precision_at_k": 0.5,
+          "keyword_coverage": 100.0,
+          "hit_rate_at_k": 1.0,
+          "question": "Most Insurellm client contracts describe the client's license as 'non-exclusive.' Which single Insurellm contract instead grants a client genuine exclusive use of a product within a specific market vertical and region, and what are that vertical and region?",
+          "category": "direct_fact"
+        }
+      ]
+    },
+    "hybrid_rrf": {
+      "mrr": 0.9333333333333333,
+      "ndcg": 0.9103708634797786,
+      "recall_at_k": 0.7423737373737374,
+      "precision_at_k": 0.63,
+      "keyword_coverage": 74.23737373737374,
+      "hit_rate_at_k": 1.0,
+      "per_question": [
+        {
+          "mrr": 1.0,
+          "ndcg": 0.9842184869190973,
+          "recall_at_k": 1.0,
+          "precision_at_k": 0.9,
+          "keyword_coverage": 100.0,
+          "hit_rate_at_k": 1.0,
+          "question": "In what year was Insurellm founded, and who founded the company?",
+          "category": "direct_fact"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 0.9043980816456213,
+          "recall_at_k": 0.8,
+          "precision_at_k": 0.5,
+          "keyword_coverage": 80.0,
+          "hit_rate_at_k": 1.0,
+          "question": "What was Insurellm's very first product, and what does it do?",
+          "category": "direct_fact"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 0.9643632283499571,
+          "recall_at_k": 0.8181818181818182,
+          "precision_at_k": 0.7,
+          "keyword_coverage": 81.81818181818183,
+          "hit_rate_at_k": 1.0,
+          "question": "Four Insurellm products all launched their 'version 1.0' during the first half of 2025. Name all four products, the exact quarter each launched in, and the core capability each version 1.0 introduced.",
+          "category": "multi_hop"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 0.9066276098484507,
+          "recall_at_k": 0.125,
+          "precision_at_k": 0.3,
+          "keyword_coverage": 12.5,
+          "hit_rate_at_k": 1.0,
+          "question": "One Insurellm employee's HR record credits her with building a recommendation engine that increased conversion by 28%, referring to the product by a slightly different name than its official product listing. Who is this employee, which Insurellm product was this actually built for, and what does that product charge consumers who want its optional premium subscription?",
+          "category": "multi_hop"
+        },
+        {
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.5847876649948583,
+          "recall_at_k": 0.5,
+          "precision_at_k": 0.3,
+          "keyword_coverage": 50.0,
+          "hit_rate_at_k": 1.0,
+          "question": "Insurellm has two Data Engineers who share the same last name. Compare their work locations, current salaries, and the specific data-pipeline efficiency improvement percentage each is credited with in their HR record.",
+          "category": "comparison"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 0.9453078548481746,
+          "recall_at_k": 0.875,
+          "precision_at_k": 0.7,
+          "keyword_coverage": 87.5,
+          "hit_rate_at_k": 1.0,
+          "question": "Two Insurellm products' development roadmaps both mention blockchain technology. Name both products, describe the blockchain-related capability each introduces, and state the exact quarter and year each is scheduled to launch.",
+          "category": "temporal"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 0.9770153702993121,
+          "recall_at_k": 0.5555555555555556,
+          "precision_at_k": 0.9,
+          "keyword_coverage": 55.55555555555556,
+          "hit_rate_at_k": 1.0,
+          "question": "Atlantic Risk Solutions and Fortress Business Underwriters both subscribe to Bizllm's Professional Tier at $12,000/month, but their contracts state different total fixed contract values because of different term lengths. What is each company's contract term length and total contract value, and what is the dollar difference between the two totals?",
+          "category": "contract"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 0.8993515008051188,
+          "recall_at_k": 0.75,
+          "precision_at_k": 0.5,
+          "keyword_coverage": 75.0,
+          "hit_rate_at_k": 1.0,
+          "question": "An insurer wants a single Insurellm platform that can underwrite multiple commercial insurance lines, includes dedicated cyber risk assessment tools, and must stay under $15,000/month before moving to custom enterprise pricing. Which product and pricing tier fits these requirements, and what specific capabilities does that tier add on top of the entry-level tier?",
+          "category": "product_selection"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 0.9971876401972103,
+          "recall_at_k": 1.0,
+          "precision_at_k": 0.9,
+          "keyword_coverage": 100.0,
+          "hit_rate_at_k": 1.0,
+          "question": "Which senior engineer serves as the technical lead for the Homellm portal, and in what quarter and year did Homellm release the version featuring expanded predictive maintenance alerts and automated underwriting processes?",
+          "category": "employee_product"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 0.9404511968899848,
+          "recall_at_k": 1.0,
+          "precision_at_k": 0.6,
+          "keyword_coverage": 100.0,
+          "hit_rate_at_k": 1.0,
+          "question": "Most Insurellm client contracts describe the client's license as 'non-exclusive.' Which single Insurellm contract instead grants a client genuine exclusive use of a product within a specific market vertical and region, and what are that vertical and region?",
+          "category": "direct_fact"
+        }
+      ]
+    },
+    "mmr": {
+      "mrr": 0.95,
+      "ndcg": 0.8995146352163552,
+      "recall_at_k": 0.6882828282828283,
+      "precision_at_k": 0.5599999999999999,
+      "keyword_coverage": 68.82828282828282,
+      "hit_rate_at_k": 1.0,
+      "per_question": [
+        {
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "recall_at_k": 1.0,
+          "precision_at_k": 1.0,
+          "keyword_coverage": 100.0,
+          "hit_rate_at_k": 1.0,
+          "question": "In what year was Insurellm founded, and who founded the company?",
+          "category": "direct_fact"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 0.8830483001978133,
+          "recall_at_k": 1.0,
+          "precision_at_k": 0.5,
+          "keyword_coverage": 100.0,
+          "hit_rate_at_k": 1.0,
+          "question": "What was Insurellm's very first product, and what does it do?",
+          "category": "direct_fact"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 0.8883444449388402,
+          "recall_at_k": 0.7272727272727273,
+          "precision_at_k": 0.6,
+          "keyword_coverage": 72.72727272727273,
+          "hit_rate_at_k": 1.0,
+          "question": "Four Insurellm products all launched their 'version 1.0' during the first half of 2025. Name all four products, the exact quarter each launched in, and the core capability each version 1.0 introduced.",
+          "category": "multi_hop"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 0.7933009890796178,
+          "recall_at_k": 0.125,
+          "precision_at_k": 0.4,
+          "keyword_coverage": 12.5,
+          "hit_rate_at_k": 1.0,
+          "question": "One Insurellm employee's HR record credits her with building a recommendation engine that increased conversion by 28%, referring to the product by a slightly different name than its official product listing. Who is this employee, which Insurellm product was this actually built for, and what does that product charge consumers who want its optional premium subscription?",
+          "category": "multi_hop"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 0.844702407490702,
+          "recall_at_k": 0.6,
+          "precision_at_k": 0.5,
+          "keyword_coverage": 60.0,
+          "hit_rate_at_k": 1.0,
+          "question": "Insurellm has two Data Engineers who share the same last name. Compare their work locations, current salaries, and the specific data-pipeline efficiency improvement percentage each is credited with in their HR record.",
+          "category": "comparison"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 0.9355457881425414,
+          "recall_at_k": 1.0,
+          "precision_at_k": 0.6,
+          "keyword_coverage": 100.0,
+          "hit_rate_at_k": 1.0,
+          "question": "Two Insurellm products' development roadmaps both mention blockchain technology. Name both products, describe the blockchain-related capability each introduces, and state the exact quarter and year each is scheduled to launch.",
+          "category": "temporal"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 0.9747429528567877,
+          "recall_at_k": 0.5555555555555556,
+          "precision_at_k": 0.5,
+          "keyword_coverage": 55.55555555555556,
+          "hit_rate_at_k": 1.0,
+          "question": "Atlantic Risk Solutions and Fortress Business Underwriters both subscribe to Bizllm's Professional Tier at $12,000/month, but their contracts state different total fixed contract values because of different term lengths. What is each company's contract term length and total contract value, and what is the dollar difference between the two totals?",
+          "category": "contract"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 0.9469024295259745,
+          "recall_at_k": 0.375,
+          "precision_at_k": 0.3,
+          "keyword_coverage": 37.5,
+          "hit_rate_at_k": 1.0,
+          "question": "An insurer wants a single Insurellm platform that can underwrite multiple commercial insurance lines, includes dedicated cyber risk assessment tools, and must stay under $15,000/month before moving to custom enterprise pricing. Which product and pricing tier fits these requirements, and what specific capabilities does that tier add on top of the entry-level tier?",
+          "category": "product_selection"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 0.9878316351280038,
+          "recall_at_k": 1.0,
+          "precision_at_k": 0.7,
+          "keyword_coverage": 100.0,
+          "hit_rate_at_k": 1.0,
+          "question": "Which senior engineer serves as the technical lead for the Homellm portal, and in what quarter and year did Homellm release the version featuring expanded predictive maintenance alerts and automated underwriting processes?",
+          "category": "employee_product"
+        },
+        {
+          "mrr": 0.5,
+          "ndcg": 0.7407274048032711,
+          "recall_at_k": 0.5,
+          "precision_at_k": 0.5,
+          "keyword_coverage": 50.0,
+          "hit_rate_at_k": 1.0,
+          "question": "Most Insurellm client contracts describe the client's license as 'non-exclusive.' Which single Insurellm contract instead grants a client genuine exclusive use of a product within a specific market vertical and region, and what are that vertical and region?",
+          "category": "direct_fact"
+        }
+      ]
+    },
+    "cross_encoder": {
+      "mrr": 0.95,
+      "ndcg": 0.9429859631168208,
+      "recall_at_k": 0.7147979797979798,
+      "precision_at_k": 0.69,
+      "keyword_coverage": 71.47979797979798,
+      "hit_rate_at_k": 1.0,
+      "per_question": [
+        {
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "recall_at_k": 1.0,
+          "precision_at_k": 1.0,
+          "keyword_coverage": 100.0,
+          "hit_rate_at_k": 1.0,
+          "question": "In what year was Insurellm founded, and who founded the company?",
+          "category": "direct_fact"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 0.8670945531783741,
+          "recall_at_k": 0.8,
+          "precision_at_k": 0.6,
+          "keyword_coverage": 80.0,
+          "hit_rate_at_k": 1.0,
+          "question": "What was Insurellm's very first product, and what does it do?",
+          "category": "direct_fact"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 0.9796825595768973,
+          "recall_at_k": 0.9090909090909091,
+          "precision_at_k": 0.6,
+          "keyword_coverage": 90.9090909090909,
+          "hit_rate_at_k": 1.0,
+          "question": "Four Insurellm products all launched their 'version 1.0' during the first half of 2025. Name all four products, the exact quarter each launched in, and the core capability each version 1.0 introduced.",
+          "category": "multi_hop"
+        },
+        {
+          "mrr": 0.5,
+          "ndcg": 0.6934264036172708,
+          "recall_at_k": 0.125,
+          "precision_at_k": 0.2,
+          "keyword_coverage": 12.5,
+          "hit_rate_at_k": 1.0,
+          "question": "One Insurellm employee's HR record credits her with building a recommendation engine that increased conversion by 28%, referring to the product by a slightly different name than its official product listing. Who is this employee, which Insurellm product was this actually built for, and what does that product charge consumers who want its optional premium subscription?",
+          "category": "multi_hop"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 0.9731203984025376,
+          "recall_at_k": 0.8,
+          "precision_at_k": 0.7,
+          "keyword_coverage": 80.0,
+          "hit_rate_at_k": 1.0,
+          "question": "Insurellm has two Data Engineers who share the same last name. Compare their work locations, current salaries, and the specific data-pipeline efficiency improvement percentage each is credited with in their HR record.",
+          "category": "comparison"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 0.9770153702993121,
+          "recall_at_k": 0.875,
+          "precision_at_k": 0.9,
+          "keyword_coverage": 87.5,
+          "hit_rate_at_k": 1.0,
+          "question": "Two Insurellm products' development roadmaps both mention blockchain technology. Name both products, describe the blockchain-related capability each introduces, and state the exact quarter and year each is scheduled to launch.",
+          "category": "temporal"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 0.9830168297915423,
+          "recall_at_k": 0.5555555555555556,
+          "precision_at_k": 0.8,
+          "keyword_coverage": 55.55555555555556,
+          "hit_rate_at_k": 1.0,
+          "question": "Atlantic Risk Solutions and Fortress Business Underwriters both subscribe to Bizllm's Professional Tier at $12,000/month, but their contracts state different total fixed contract values because of different term lengths. What is each company's contract term length and total contract value, and what is the dollar difference between the two totals?",
+          "category": "contract"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 0.9911205770005563,
+          "recall_at_k": 0.75,
+          "precision_at_k": 0.7,
+          "keyword_coverage": 75.0,
+          "hit_rate_at_k": 1.0,
+          "question": "An insurer wants a single Insurellm platform that can underwrite multiple commercial insurance lines, includes dedicated cyber risk assessment tools, and must stay under $15,000/month before moving to custom enterprise pricing. Which product and pricing tier fits these requirements, and what specific capabilities does that tier add on top of the entry-level tier?",
+          "category": "product_selection"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 0.9895948844467957,
+          "recall_at_k": 1.0,
+          "precision_at_k": 0.9,
+          "keyword_coverage": 100.0,
+          "hit_rate_at_k": 1.0,
+          "question": "Which senior engineer serves as the technical lead for the Homellm portal, and in what quarter and year did Homellm release the version featuring expanded predictive maintenance alerts and automated underwriting processes?",
+          "category": "employee_product"
+        },
+        {
+          "mrr": 1.0,
+          "ndcg": 0.975788054854922,
+          "recall_at_k": 0.3333333333333333,
+          "precision_at_k": 0.5,
+          "keyword_coverage": 33.33333333333333,
+          "hit_rate_at_k": 1.0,
+          "question": "Most Insurellm client contracts describe the client's license as 'non-exclusive.' Which single Insurellm contract instead grants a client genuine exclusive use of a product within a specific market vertical and region, and what are that vertical and region?",
+          "category": "direct_fact"
+        }
+      ]
+    }
+  }
+}
