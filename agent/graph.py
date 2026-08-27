@@ -1,7 +1,7 @@
 from langgraph.graph import StateGraph, START, END
 
-from state import RAGState
-from nodes import (
+from agent.state import RAGState
+from agent.nodes import (
     planner_node,
     query_expansion_node,
     retrieval_node,
@@ -11,6 +11,7 @@ from nodes import (
     fallback_node,
     finalize_node,
     route_after_evaluation,
+    route_after_planner,
 )
 
 builder = StateGraph(RAGState)
@@ -25,7 +26,15 @@ builder.add_node("finalize", finalize_node)
 builder.add_node("query_expansion", query_expansion_node)
 
 builder.add_edge(START, "planner")
-builder.add_edge("planner", "query_expansion")
+builder.add_conditional_edges(
+    "planner",
+    route_after_planner,
+    {
+        "retrieve": "query_expansion",
+        "no_retrieval": "generation",
+    },
+)
+
 builder.add_edge("query_expansion", "retrieval")
 builder.add_edge("retrieval", "generation")
 builder.add_edge("generation", "evaluator")
@@ -50,7 +59,7 @@ graph = builder.compile()
 if __name__ == "__main__":
     result = graph.invoke({
         "query": "How did Nova Robotics' R&D spending change from 2022 to 2024?",
-        "max_iterations": 3,
+        "max_iterations": 5,
     })
 
     print(result["final_answer"])

@@ -11,7 +11,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 load_dotenv(PROJECT_ROOT / ".env", override=True)
 
-from tools import RETRIEVAL_TOOLS
+from agent.tools import RETRIEVAL_TOOLS
 from retrieval.rewrite import rewrite_query
 from evaluation.metrics import evaluate_answer_with_llm, calculate_retrieval_metrics
 
@@ -55,13 +55,19 @@ def planner_node(state):
         "needs_retrieval": result.needs_retrieval,
         "use_query_expansion": result.use_query_expansion,
         "iteration": 0,
-        "max_iterations": state.get("max_iterations", 3),
+        "max_iterations": state.get("max_iterations", 5),
         "attempt_history": [],
         "next_action": "",
         "status": "pending",
         "used_query": state["query"],
         "faithfulness_strict": False,
     }
+
+def route_after_planner(state):
+    if state["needs_retrieval"]:
+        return "retrieve"
+
+    return "no_retrieval"
 
 def query_expansion_node(state):
     if not state.get("use_query_expansion", False):
@@ -124,6 +130,26 @@ def retrieval_node(state):
 # ============================================================
 
 def generation_node(state):
+    chunks = state.get("retrieved_chunks", [])
+
+    # No retrieval needed
+    if not chunks:
+        response = gemini_llm.invoke(
+            f"Answer this user query naturally and concisely:\n\n"
+            f"{state['query']}"
+        )
+
+        content = response.content
+
+        if isinstance(content, list):
+            content = " ".join(
+                part.get("text", "") if isinstance(part, dict)
+                else str(part)
+                for part in content
+            )
+
+        return {"answer": content}
+
     context = "\n\n".join(
         f"[{i+1}] (source: {c['source']}) {c['content']}"
         for i, c in enumerate(state["retrieved_chunks"])
