@@ -1,0 +1,26 @@
+{
+  "collections": {
+    "c465e0b5": {
+      "name": "test1",
+      "created_at": "/Users/nasir/Learnings/llm-engg-self/Projects/RAG_Agent/ingestion/collection_manager.py",
+      "document_count": 0,
+      "chunk_count": 0,
+      "status": "empty",
+      "files": []
+    },
+    "59c1dfe0": {
+      "name": "uploaded_docs",
+      "created_at": "/Users/nasir/Learnings/llm-engg-self/Projects/RAG_Agent/ingestion/collection_manager.py",
+      "document_count": 5,
+      "chunk_count": 5,
+      "status": "ready",
+      "files": [
+        "financials.md",
+        "employees.md",
+        "competitor.md",
+        "products.md",
+        "company.md"
+      ]
+    }
+  }
+}

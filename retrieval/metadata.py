@@ -1,4 +1,10 @@
-from retrieval.vector import vectorstore
+"""
+Metadata-filtered search.
+
+Uses the active collection dynamically via the shared vectorstore.
+"""
+
+from retrieval.retriever import get_vectorstore
 
 
 def metadata_search(
@@ -6,6 +12,8 @@ def metadata_search(
     metadata_filter: dict,
     k: int = 10
 ):
+
+    vectorstore = get_vectorstore()
 
     return vectorstore.similarity_search(
         query,

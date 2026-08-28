@@ -20,7 +20,7 @@ llm = ChatGoogleGenerativeAI(
 
 
 SYSTEM_PROMPT = """
-You are an assistant for Insurellm.
+You are a helpful document assistant.
 
 Answer the user's question using ONLY the provided context.
 
@@ -28,6 +28,7 @@ Rules:
 - Do not invent information.
 - If the context does not contain enough information, say so.
 - Give a direct and concise answer.
+- Cite sources when possible.
 
 Context:
 

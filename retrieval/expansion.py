@@ -1,9 +1,13 @@
-from langchain_google_genai import (
-    ChatGoogleGenerativeAI
-)
+"""
+Multi-query expansion and MMR search.
+
+Uses the active collection dynamically via the shared vectorstore.
+"""
+
+from langchain_google_genai import ChatGoogleGenerativeAI
 from pathlib import Path
 
-from retrieval.vector import vectorstore
+from retrieval.retriever import get_vectorstore
 from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,10 +23,7 @@ llm = ChatGoogleGenerativeAI(
 # Multi Query
 # ============================================================
 
-def generate_queries(
-    query: str,
-    number: int = 3
-):
+def generate_queries(query: str, number: int = 3):
 
     prompt = f"""
 Generate {number} different retrieval queries
@@ -38,13 +39,14 @@ Return exactly {number} queries.
 One query per line.
 """
 
-    response = llm.invoke(
-        prompt
-    )
+    response = llm.invoke(prompt)
 
     content = response.content
     if isinstance(content, list):
-        text_parts = [part.get("text", "") if isinstance(part, dict) else str(part) for part in content]
+        text_parts = [
+            part.get("text", "") if isinstance(part, dict) else str(part)
+            for part in content
+        ]
         content = " ".join(text_parts)
 
     queries = [
@@ -56,32 +58,18 @@ One query per line.
     return queries[:number]
 
 
-def multi_query_search(
-    query: str,
-    k: int = 10
-):
+def multi_query_search(query: str, k: int = 10):
 
-    queries = generate_queries(
-        query
-    )
-
+    vectorstore = get_vectorstore()
+    queries = generate_queries(query)
     results = []
-
     seen = set()
 
     for search_query in queries:
-
-        docs = vectorstore.similarity_search(
-            search_query,
-            k=k
-        )
-
+        docs = vectorstore.similarity_search(search_query, k=k)
         for doc in docs:
-
             key = doc.page_content
-
             if key not in seen:
-
                 seen.add(key)
                 results.append(doc)
 
@@ -92,10 +80,9 @@ def multi_query_search(
 # MMR
 # ============================================================
 
-def mmr_search(
-    query: str,
-    k: int = 10
-):
+def mmr_search(query: str, k: int = 10):
+
+    vectorstore = get_vectorstore()
 
     return vectorstore.max_marginal_relevance_search(
         query,

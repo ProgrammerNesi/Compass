@@ -42,7 +42,32 @@ class PlanOutput(BaseModel):
 planner_llm = gemini_llm.with_structured_output(PlanOutput)
 
 
+_GREETING_PATTERNS = {
+    "hi", "hello", "hey", "hiya", "yo", "howdy", "sup", "what's up",
+    "good morning", "good afternoon", "good evening", "good night",
+    "thanks", "thank you", "bye", "goodbye", "see you",
+    "ok", "okay", "sure", "yes", "no", "maybe",
+    "help", "what can you do", "who are you",
+}
+
+
 def planner_node(state):
+    query = state["query"].strip().lower().rstrip("!.?")
+
+    # Bypass LLM for greetings and trivial queries
+    if query in _GREETING_PATTERNS or len(query.split()) <= 2:
+        return {
+            "needs_retrieval": False,
+            "use_query_expansion": False,
+            "iteration": 0,
+            "max_iterations": state.get("max_iterations", 5),
+            "attempt_history": [],
+            "next_action": "",
+            "status": "pending",
+            "used_query": state["query"],
+            "faithfulness_strict": False,
+        }
+
     result = planner_llm.invoke([
         SystemMessage(content=(
             "You are a query planner for a document QA system. Decide whether "
@@ -63,11 +88,43 @@ def planner_node(state):
         "faithfulness_strict": False,
     }
 
-def route_after_planner(state):
-    if state["needs_retrieval"]:
-        return "retrieve"
 
+def route_after_planner(state):
+    if state.get("needs_retrieval"):
+        return "retrieve"
     return "no_retrieval"
+
+
+# ============================================================
+# DIRECT RESPONSE — lightweight path for greetings / non-doc queries
+# ============================================================
+
+def direct_response_node(state):
+    response = gemini_llm.invoke(
+        f"Answer this user message naturally and concisely:\n\n"
+        f"{state['query']}"
+    )
+
+    content = response.content
+    if isinstance(content, list):
+        content = " ".join(
+            part.get("text", "") if isinstance(part, dict)
+            else str(part)
+            for part in content
+        )
+
+    return {
+        "final_answer": content,
+        "confidence": "High",
+        "status": "passed",
+        "iteration": 0,
+        "retrieved_chunks": [],
+        "tools_used": [],
+        "scores": {},
+        "failed_metrics": [],
+        "answer": content,
+    }
+
 
 def query_expansion_node(state):
     if not state.get("use_query_expansion", False):
@@ -216,7 +273,8 @@ eval_llm = gemini_llm.with_structured_output(EvalOutput)
 
 
 def evaluator_node(state):
-    context = "\n\n".join(c["content"] for c in state["retrieved_chunks"])
+    chunks = state.get("retrieved_chunks", [])
+    context = "\n\n".join(c["content"] for c in chunks)
 
     result = eval_llm.invoke([
         SystemMessage(content=(
@@ -257,8 +315,8 @@ ACTION_MAP = {
 def diagnosis_node(state):
     attempt = {
         "iteration": state["iteration"],
-        "tools_used": state["tools_used"],
-        "retrieved_chunks": state["retrieved_chunks"],
+        "tools_used": state.get("tools_used", []),
+        "retrieved_chunks": state.get("retrieved_chunks", []),
         "answer": state["answer"],
         "scores": state["scores"],
         "avg_score": sum(state["scores"].values()) / len(state["scores"]),

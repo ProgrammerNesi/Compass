@@ -11,7 +11,7 @@ class Attempt(TypedDict):
     avg_score: float
 
 
-class RAGState(TypedDict):
+class RAGState(TypedDict, total=False):
     # ---- input ----
     query: str
 
@@ -26,13 +26,13 @@ class RAGState(TypedDict):
     answer: str
     scores: Dict[str, float]
     failed_metrics: List[str]
-    used_query: str             # the query actually used for retrieval (original or expanded)
-    faithfulness_strict: bool   # when True, generation uses stricter grounding prompt
+    used_query: str
+    faithfulness_strict: bool
 
     # ---- control flow ----
     iteration: int
     max_iterations: int
-    next_action: str          # instruction the diagnosis node injects into the retry
+    next_action: str
 
     # ---- memory across iterations, used only by fallback ----
     attempt_history: List[Attempt]

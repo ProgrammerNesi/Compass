@@ -10,6 +10,7 @@ from agent.nodes import (
     diagnosis_node,
     fallback_node,
     finalize_node,
+    direct_response_node,
     route_after_evaluation,
     route_after_planner,
 )
@@ -17,6 +18,7 @@ from agent.nodes import (
 builder = StateGraph(RAGState)
 
 builder.add_node("planner", planner_node)
+builder.add_node("direct_response", direct_response_node)
 builder.add_node("retrieval", retrieval_node)
 builder.add_node("generation", generation_node)
 builder.add_node("evaluator", evaluator_node)
@@ -31,7 +33,7 @@ builder.add_conditional_edges(
     route_after_planner,
     {
         "retrieve": "query_expansion",
-        "no_retrieval": "generation",
+        "no_retrieval": "direct_response",
     },
 )
 
@@ -50,6 +52,7 @@ builder.add_conditional_edges(
 )
 
 builder.add_edge("diagnosis", "retrieval")   # the actual retry loop
+builder.add_edge("direct_response", END)
 builder.add_edge("finalize", END)
 builder.add_edge("fallback", END)
 

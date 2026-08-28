@@ -1,22 +1,11 @@
-from pathlib import Path
+"""
+Vector similarity search — now uses the active collection dynamically.
 
-from langchain_chroma import Chroma
-from langchain_huggingface import HuggingFaceEmbeddings
+Falls back to the legacy baseline collection when no collection is
+explicitly activated (preserves benchmark compatibility).
+"""
 
-
-BASE_DIR = Path(__file__).parent.parent
-VECTOR_DB = BASE_DIR / "vector_db"
-
-
-embeddings = HuggingFaceEmbeddings(
-    model_name="BAAI/bge-small-en-v1.5"
-)
-
-vectorstore = Chroma(
-    persist_directory=str(VECTOR_DB),
-    collection_name="baseline",
-    embedding_function=embeddings
-)
+from retrieval.retriever import get_vectorstore
 
 
 def vector_search(
@@ -31,6 +20,8 @@ def vector_search(
     - conceptual questions
     - semantically similar information
     """
+
+    vectorstore = get_vectorstore()
 
     return vectorstore.similarity_search(
         query,
